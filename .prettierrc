@@ -1,4 +1,7 @@
 {
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "arrowParens": "avoid",
   "jsxSingleQuote": true,
   "bracketSameLine": true,
