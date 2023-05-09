@@ -28,5 +28,6 @@ export const MainWapper = styled.div`
     border: none;
     font-size: 16px;
     cursor: pointer;
+    background-color: red;
   }
 `;
