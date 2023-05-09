@@ -1,11 +1,20 @@
+import { useState } from 'react';
+
 import * as S from './styled';
+import CreateItemBox from './CreateItembox';
+import ItemList from './ItemList';
 function Todos() {
+  const [todoName, setTodoName] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  const createTodo = () => {
+    setTodos(prevState => [...prevState, { id: prevState.length, name: todoName }]);
+  };
   return (
     <S.Container>
-      <S.Title>ToDoList</S.Title>
-      <S.InputBox>
-        <S.Input placeholder='입력'></S.Input>
-      </S.InputBox>
+      <S.Title>To do list</S.Title>
+      <CreateItemBox onChange={setTodoName} createTodo={createTodo} />
+      <ItemList todos={todos} />
     </S.Container>
   );
 }
