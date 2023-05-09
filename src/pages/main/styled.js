@@ -19,15 +19,15 @@ export const MainWapper = styled.div`
   > div {
     font-size: 24px;
     font-weight: 700;
-    &:hover {
-      color: red;
-    }
   }
   > ${Button} {
     padding: 8px 14px;
     border: none;
     font-size: 16px;
     cursor: pointer;
-    background-color: red;
+  }
+  > a {
+    color: #000000;
+    text-decoration: none;
   }
 `;
