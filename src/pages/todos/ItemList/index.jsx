@@ -1,10 +1,17 @@
 import * as S from './styled';
-import Todo from '../../todo';
-function ItemList({ todos }) {
+import Todo from '../../../components/todo';
+function ItemList({ todos, deleteTodo }) {
   return (
     <S.ItemList>
       {todos.map(({ id, name }) => {
-        return <Todo key={id}>{name}</Todo>;
+        const handleDeleteTodo = () => {
+          deleteTodo(id);
+        };
+        return (
+          <Todo key={id} deleteTodo={handleDeleteTodo}>
+            {name}
+          </Todo>
+        );
       })}
     </S.ItemList>
   );

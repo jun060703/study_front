@@ -2,7 +2,12 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
   display: flex;
-  align-items: center;
-  justyfy-content: center;
-  border-radius: 4px;
+  border-radius: 20px;
+  background-color: gray;
+  color: white;
+  margin-bottom: 15px;
+  text-decoration: underline;
+  margin-left: 15px;
+  width: 60px;
+  text-align: center;
 `;
