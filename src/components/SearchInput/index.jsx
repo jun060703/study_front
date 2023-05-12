@@ -10,7 +10,11 @@ function SearchInput({ onChange }) {
 
   return (
     <S.SearchInputBox>
-      <S.SearchInput plcaeholder='검색할 내용을 입력하세요' value={value} onChange={handleValue} />
+      <S.SearchInputBox
+        plcaeholder='검색할 내용을 입력하세요'
+        value={value}
+        onChange={handleValue}
+      />
     </S.SearchInputBox>
   );
 }
