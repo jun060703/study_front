@@ -4,10 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import * as S from './styled';
 import CreateItemBox from './CreateItembox';
 import ItemList from './ItemList';
+import SearchInput from '../../components/SearchInput/';
 function Todos() {
   const [todoName, setTodoName] = useState('');
   const [todos, setTodos] = useState([]);
-
+  const [searchvalue, setSearchValue] = useState('');
   const createTodo = () => {
     console.log('asdfdasf');
     if (!todoName.trim()) {
@@ -45,9 +46,14 @@ function Todos() {
   return (
     <S.Container>
       <S.Title>To do list</S.Title>
+      <searchInput
+        onChange={value => {
+          setSearchValue(value);
+        }}
+      />
       <CreateItemBox value={todoName} onChange={setTodoName} createTodo={createTodo} />
 
-      <ItemList todos={todos} deleteTodo={deleteTodo} />
+      <ItemList todos={todos} searchvalue={searchvalue} deleteTodo={deleteTodo} />
     </S.Container>
   );
 }
