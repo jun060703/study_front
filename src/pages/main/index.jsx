@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import Button from '../../components/Button';
 
+import Search from '../../components/SearchInput';
+
 import * as S from './styled';
 function Main() {
   return (
