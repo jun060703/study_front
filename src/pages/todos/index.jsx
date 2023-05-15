@@ -1,43 +1,40 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { setTodos, createTodo, deleteSelectedTodos, deleteTodo } from '../../reduce/todos';
 import * as S from './styled';
 import CreateItemBox from './CreateItembox';
-import ItemList from './ItemList';
+import ItemList from './ItemList/';
 import SearchInput from '../../components/SearchInput/';
 import Button from '../../components/Button';
 function Todos() {
   const [todoName, setTodoName] = useState('');
-  const [todos, setTodos] = useState([]);
+  const [tempTodos, setTodos] = useState([]);
   const [searchvalue, setSearchValue] = useState('');
   //선택한 todos들을 저장하는 state
   const [seletedTodoIds, setSelectedTodoIds] = useState([]);
-  const createTodo = () => {
-    console.log('asdfdasf');
+
+  const dispatch = useDispatch();
+  const { todos } = useSelector(state => state.todos);
+  const handelCreateTodo = () => {
     if (!todoName.trim()) {
       alert('값이 없습니다');
       return;
     }
     setTodoName('');
-    setTodos(prevState => [...prevState, { id: uuidv4(), name: todoName }]);
+    dispatch(createTodo({ id: uuidv4(), name: todoName }));
   };
-  const deleteTodo = id => {
-    const findIndex = todos.findIndex(v => v.id === id);
-    setTodos(prevState => {
-      const tempArr = [...prevState];
-      tempArr.splice(findIndex, 1);
-      return tempArr;
-    });
+  const handelTodoDeleteTodo = id => {
+    dispatch(deleteTodo(id));
   };
-  const deleteSelectedTodos = () => {
-    setTodos(prevState => {
-      return prevState.filter(todo => !seletedTodoIds.includes(todo.id));
-    });
+  const handleSelectedTodoDelete = () => {
+    dispatch(deleteSelectedTodos(seletedTodoIds));
   };
   useEffect(() => {
     try {
       const parseTodos = JSON.parse(localStorage.getItem('todos'));
-      setTodos(parseTodos);
+      dispatch(setTodos(parseTodos));
     } catch (error) {
       console.log(error);
     }
@@ -54,20 +51,20 @@ function Todos() {
   return (
     <S.Container>
       <S.Title>To do list</S.Title>
-      <searchInput
+      <SearchInput
         onChange={value => {
           setSearchValue(value);
         }}
       />
-      <CreateItemBox value={todoName} onChange={setTodoName} createTodo={createTodo} />
-      <S.Button classname='buttond' onClick={deleteSelectedTodos}>
+      <CreateItemBox value={todoName} onChange={setTodoName} createTodo={handelCreateTodo} />
+      <S.Button classname='buttond' onClick={handleSelectedTodoDelete}>
         선택된 todo삭제
       </S.Button>
 
       <ItemList
         todos={todos}
         searchvalue={searchvalue}
-        deleteTodo={deleteTodo}
+        deleteTodo={handelTodoDeleteTodo}
         setSelectedTodoIds={setSelectedTodoIds}
       />
     </S.Container>
