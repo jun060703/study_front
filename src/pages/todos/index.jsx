@@ -5,10 +5,13 @@ import * as S from './styled';
 import CreateItemBox from './CreateItembox';
 import ItemList from './ItemList';
 import SearchInput from '../../components/SearchInput/';
+import Button from '../../components/Button';
 function Todos() {
   const [todoName, setTodoName] = useState('');
   const [todos, setTodos] = useState([]);
   const [searchvalue, setSearchValue] = useState('');
+  //선택한 todos들을 저장하는 state
+  const [seletedTodoIds, setSelectedTodoIds] = useState([]);
   const createTodo = () => {
     console.log('asdfdasf');
     if (!todoName.trim()) {
@@ -24,6 +27,11 @@ function Todos() {
       const tempArr = [...prevState];
       tempArr.splice(findIndex, 1);
       return tempArr;
+    });
+  };
+  const deleteSelectedTodos = () => {
+    setTodos(prevState => {
+      return prevState.filter(todo => !seletedTodoIds.includes(todo.id));
     });
   };
   useEffect(() => {
@@ -52,8 +60,16 @@ function Todos() {
         }}
       />
       <CreateItemBox value={todoName} onChange={setTodoName} createTodo={createTodo} />
+      <S.Button classname='buttond' onClick={deleteSelectedTodos}>
+        선택된 todo삭제
+      </S.Button>
 
-      <ItemList todos={todos} searchvalue={searchvalue} deleteTodo={deleteTodo} />
+      <ItemList
+        todos={todos}
+        searchvalue={searchvalue}
+        deleteTodo={deleteTodo}
+        setSelectedTodoIds={setSelectedTodoIds}
+      />
     </S.Container>
   );
 }

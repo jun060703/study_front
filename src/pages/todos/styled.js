@@ -10,3 +10,14 @@ export const Container = styled.div`
   padding: 16px;
 `;
 export const Title = styled.h2``;
+
+export const Button = styled.button`
+  width: 200px;
+  height: 50px;
+  background-color: blue;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 30px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  margin-bottom: 30px;
+`;
