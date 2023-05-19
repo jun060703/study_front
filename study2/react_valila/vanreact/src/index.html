@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        let currentTateKey=0;
+        const states = []; //state를 보관할 배열
+        //useState라는 함수를 만들어 주엇음
+        //useState의 매개변수는 inistate를 받아온다
+        function useState(initState) {
+
+            //state값이 없을때만
+            const key=currentTateKey
+            if (states.length=== key) {
+                states.push(initState)
+            }
+
+            //state를 할당
+            const state =states [key] 
+                const setState=(newState)=>{
+                states[key]=newState
+                render();
+                
+            }
+            currentTateKey +=1
+            return [state, setState];
+        };
+
+
+
+        function Counter() {
+
+            //첫번째 인자로 Count라는 값을 받아오고
+            //두번째 인자로 setcount라는 값을 받아온다
+            //위에서 작성한 useStae함수에 initState로 1을 전달한다
+            const [count, setCount] = useState(1)
+
+            //setCount로 COut에 +1을해준다
+            //increament라는 함수를 만들어준다
+            window.increment = () => setCount(count + 1);
+            //function increment(){}
+
+
+
+            //tag return한다
+            return `
+            <div>
+                <strong>count:${count} </strong>
+                <button onClick="increment()">증가</button>
+            </div>
+            `
+        }
+        function Cat() {
+            const [cat, setCat] = useState('고양이:');
+
+            window.meow = () => setCat(cat + `야옹`);
+
+            return `
+    <div>
+      <strong>${cat}</strong>
+      <button onclick="meow()">고양이의 울음소리</button>
+    </div>
+  `;
+        }
+        //id가 app인걸 찾음
+        function render() {
+            app.innerHTML = `
+    <div>
+      ${Counter()}
+      ${Cat()}
+    </div>
+    
+  `;
+
+  currentTateKey=0;
+        }
+        render();
+    </script>
+</body>
+
+</html>
